@@ -1,5 +1,9 @@
 const bookTable = document.querySelector('table');
-const tableBody = document.getElementById('tableBody');
+const tableBody = document.querySelector('#tableBody');
+const addBookButton = document.querySelector('.addButton');
+const modal = document.querySelector('#myModal');
+const span = document.querySelector('.close');
+const submitButton = document.querySelector('#submitButton');
 
 let myLibrary = [];
 
@@ -8,14 +12,6 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
-    if (read) {
-      read = 'already read';
-    } else {
-      ('have not read yet');
-    }
-    return `${title} by ${author}, ${pages} pages, ${read}`;
-  };
 }
 
 function addBook(obj) {
@@ -23,10 +19,33 @@ function addBook(obj) {
 }
 
 const book1 = new Book('Matematika itu Menyenangkan', 'Ilmi Kalam', 333, true);
-const book2 = new Book('Fisika itu Susah', 'SopiCOD', 132, false);
 
 addBook(book1);
-addBook(book2);
+
+addBookButton.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+
+submitButton.addEventListener('click', () => {
+  const bookTitle = document.querySelector('#title').value;
+  const bookAuthor = document.querySelector('#author').value;
+  const bookPages = document.querySelector('#pages').value;
+  const readStatus = document.querySelector('input[name=isRead]:checked').value;
+  const newBook = new Book(bookTitle, bookAuthor, bookPages, readStatus);
+  addBook(newBook);
+  displayItem(myLibrary);
+  modal.style.display = 'none';
+});
+
+span.onclick = function () {
+  modal.style.display = 'none';
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+};
 
 function displayItem(arr) {
   let books = '';
@@ -43,3 +62,8 @@ function displayItem(arr) {
 }
 
 displayItem(myLibrary);
+
+/*
+Hey 👋 , I consoled logged your input value and your input value is being stored in the variable. 
+Few other things... you might want to be consistent in grabbing your DOM elements either use getElementBy or querySelector. Also, in your html you don't have to wrap your modal inputs in the form element. Furthermore, trigger the submit button function inside the JS file rather than using onclick property from the HTML. Your book submitting button should have an eventListener that triggers another function to grab the input values to create a new Book, which then gets pushed to the array. Let us know how you are doing again
+*/
