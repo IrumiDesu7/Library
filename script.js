@@ -51,10 +51,10 @@ function displayItem(arr) {
   let books = '';
   arr.forEach((item) => {
     books += `<tr>
-          <th>${item.title}</th>
-          <th>${item.author}</th>
-          <th>${item.pages}</th>
-          <th>${item.read}</th>
+          <td>${item.title}</td>
+          <td>${item.author}</td>
+          <td>${item.pages}</td>
+          <td>${item.read}</td>
         </tr>`;
     tableBody.innerHTML = books;
     bookTable.appendChild(tableBody);
