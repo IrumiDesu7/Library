@@ -30,23 +30,29 @@ document.addEventListener('click', (e) => {
 
 function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
+  table.innerHTML = `<tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Pages</th>
+        <th>Read</th>
+      </tr>`;
 
   let displayArray = myLibrary.map((item) => {
-    return `<tr>
-      <th>${item.title}</th>
-      <th>${item.author}</th>
-      <th>${item.pages}</th>
-      <th>${item.read}</th>
-    </tr>`;
+    const newRow = document.createElement('tr');
+    const titleData = document.createElement('td');
+    const authorData = document.createElement('td');
+    const pagesData = document.createElement('td');
+    const readData = document.createElement('td');
+    titleData.textContent = item.title;
+    authorData.textContent = item.author;
+    pagesData.textContent = item.pages;
+    readData.textContent = item.read;
+    newRow.appendChild(titleData);
+    newRow.appendChild(authorData);
+    newRow.appendChild(pagesData);
+    newRow.appendChild(readData);
+    table.appendChild(newRow);
   });
-  displayArray = displayArray.join('');
-  let tableHeader = `<tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Pages</th>
-          <th>Read</th>
-        </tr>`;
-  table.innerHTML = tableHeader + displayArray;
 }
 
 submitButton.addEventListener('click', function () {
