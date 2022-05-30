@@ -1,74 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
+
+* {
+  /* border: 1px solid blueviolet; */
+}
+
+:root {
+  --color1: #ebc2b3;
+  --color2: #d5cfc2;
+  --color3: #75868d;
+  --color4: #5a8e94;
+  --color5: #cad6d3;
+}
 
 html,
 body {
   margin: 0;
   height: 100%;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-table {
-  text-align: left;
-  width: 960px;
-}
-
-th {
-  background-color: rgb(33, 199, 144);
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+  background-color: var(--color5);
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: aquamarine;
-  height: 100vh;
 }
 
-button,
-#submitButton {
-  background-color: orange;
-  font-size: 1.1rem;
-  border: 0;
-  color: white;
-  border-radius: 20px;
-  width: 150px;
-  height: 50px;
-  margin: 10px;
+.addButton {
+  width: 100px;
+  height: 30px;
+  align-self: center;
+  margin-bottom: 15px;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modalContent {
-  background-color: aquamarine;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
+form {
+  display: flex;
+  flex-direction: column;
   width: 80%;
 }
 
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+table th,
+table td {
+  width: 200px;
+  height: 20px;
+  text-align: left;
 }
 
-.close:hover,
-.close:focus {wdada
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+/* Modal Styling */
+.modalContainer {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
+
+.anotherContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 40%;
+  background-color: var(--color1);
+  margin: 10% auto;
+}
+/* End of Modal Styling */

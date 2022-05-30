@@ -1,11 +1,11 @@
-const bookTable = document.querySelector('table');
-const tableBody = document.querySelector('#tableBody');
-const addBookButton = document.querySelector('.addButton');
-const modal = document.querySelector('#myModal');
-const span = document.querySelector('.close');
-const submitButton = document.querySelector('#submitButton');
+const submitButton = document.querySelector('.submitBtn');
+const table = document.querySelector('tbody');
+const addButton = document.querySelector('.addButton');
+const modalContainer = document.querySelector('.modalContainer');
+const closeModalBtn = document.querySelector('.close');
 
 let myLibrary = [];
+let radioValue;
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -14,56 +14,49 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addBook(obj) {
-  myLibrary.push(obj);
-}
-
-const book1 = new Book('Matematika itu Menyenangkan', 'Ilmi Kalam', 333, true);
-
-addBook(book1);
-
-addBookButton.addEventListener('click', () => {
-  modal.style.display = 'block';
+addButton.addEventListener('click', () => {
+  modalContainer.style.display = 'block';
 });
 
-submitButton.addEventListener('click', () => {
-  const bookTitle = document.querySelector('#title').value;
-  const bookAuthor = document.querySelector('#author').value;
-  const bookPages = document.querySelector('#pages').value;
-  const readStatus = document.querySelector('input[name=isRead]:checked').value;
-  const newBook = new Book(bookTitle, bookAuthor, bookPages, readStatus);
-  addBook(newBook);
-  displayItem(myLibrary);
-  modal.style.display = 'none';
+closeModalBtn.addEventListener('click', () => {
+  modalContainer.style.display = 'none';
 });
 
-span.onclick = function () {
-  modal.style.display = 'none';
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = 'none';
+document.addEventListener('click', (e) => {
+  if (e.target == modalContainer) {
+    modalContainer.style.display = 'none';
   }
-};
+});
 
-function displayItem(arr) {
-  let books = '';
-  arr.forEach((item) => {
-    books += `<tr>
-          <td>${item.title}</td>
-          <td>${item.author}</td>
-          <td>${item.pages}</td>
-          <td>${item.read}</td>
-        </tr>`;
-    tableBody.innerHTML = books;
-    bookTable.appendChild(tableBody);
+function addBookToLibrary(title, author, pages, read) {
+  myLibrary.push(new Book(title, author, pages, read));
+
+  let displayArray = myLibrary.map((item) => {
+    return `<tr>
+      <th>${item.title}</th>
+      <th>${item.author}</th>
+      <th>${item.pages}</th>
+      <th>${item.read}</th>
+    </tr>`;
   });
+  displayArray = displayArray.join('');
+  let tableHeader = `<tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Read</th>
+        </tr>`;
+  table.innerHTML = tableHeader + displayArray;
 }
 
-displayItem(myLibrary);
-
-/*
-Hey 👋 , I consoled logged your input value and your input value is being stored in the variable. 
-Few other things... you might want to be consistent in grabbing your DOM elements either use getElementBy or querySelector. Also, in your html you don't have to wrap your modal inputs in the form element. Furthermore, trigger the submit button function inside the JS file rather than using onclick property from the HTML. Your book submitting button should have an eventListener that triggers another function to grab the input values to create a new Book, which then gets pushed to the array. Let us know how you are doing again
-*/
+submitButton.addEventListener('click', function () {
+  radioValue = document.querySelector('input[name="read"]:checked').value;
+  if (title.value === '' || author.value === '' || pages.value === '') {
+    return;
+  } else {
+    addBookToLibrary(title.value, author.value, pages.value, radioValue);
+  }
+  // title.value = '';
+  // author.value = '';
+  // pages.value = '';
+});
