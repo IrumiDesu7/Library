@@ -62,7 +62,8 @@ submitButton.addEventListener('click', function () {
   } else {
     addBookToLibrary(title.value, author.value, pages.value, radioValue);
   }
-  // title.value = '';
-  // author.value = '';
-  // pages.value = '';
+  title.value = '';
+  author.value = '';
+  pages.value = '';
+  modalContainer.style.display = 'none';
 });
