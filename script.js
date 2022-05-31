@@ -3,6 +3,7 @@ const table = document.querySelector('tbody');
 const addButton = document.querySelector('.addButton');
 const modalContainer = document.querySelector('.modalContainer');
 const closeModalBtn = document.querySelector('.close');
+let deleteButtons = [];
 
 let myLibrary = [];
 let radioValue;
@@ -28,31 +29,50 @@ document.addEventListener('click', (e) => {
   }
 });
 
-function addBookToLibrary(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+function displayUpdate() {
   table.innerHTML = `<tr>
         <th>Title</th>
         <th>Author</th>
         <th>Pages</th>
         <th>Read</th>
+        <th>Action</th>
       </tr>`;
 
-  let displayArray = myLibrary.map((item) => {
+  myLibrary.map((item, index) => {
     const newRow = document.createElement('tr');
     const titleData = document.createElement('td');
     const authorData = document.createElement('td');
     const pagesData = document.createElement('td');
     const readData = document.createElement('td');
+    const deleteButton = document.createElement('button');
+
     titleData.textContent = item.title;
     authorData.textContent = item.author;
     pagesData.textContent = item.pages;
     readData.textContent = item.read;
+    deleteButton.textContent = 'Delete';
+    deleteButton.setAttribute('data-index', `${index}`);
+    deleteButton.classList.add('deleteBook');
+
     newRow.appendChild(titleData);
     newRow.appendChild(authorData);
     newRow.appendChild(pagesData);
     newRow.appendChild(readData);
+    newRow.appendChild(deleteButton);
     table.appendChild(newRow);
+    deleteButtons = document.querySelectorAll('.deleteBook');
   });
+}
+document.addEventListener('click', (e) => {
+  if (e.target.dataset.index !== undefined) {
+    myLibrary.splice(e.target.dataset.index, 1);
+    displayUpdate();
+  }
+});
+
+function addBookToLibrary(title, author, pages, read) {
+  myLibrary.push(new Book(title, author, pages, read));
+  displayUpdate();
 }
 
 submitButton.addEventListener('click', function () {
