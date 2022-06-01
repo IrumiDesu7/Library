@@ -4,6 +4,7 @@ const addButton = document.querySelector('.addButton');
 const modalContainer = document.querySelector('.modalContainer');
 const closeModalBtn = document.querySelector('.close');
 let deleteButtons = [];
+let readButtons = [];
 
 let myLibrary = [];
 let radioValue;
@@ -15,18 +16,20 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.changeRead = function () {
+  if (this.read === 'true') {
+    this.read = 'false';
+  } else {
+    this.read = 'true';
+  }
+};
+
 addButton.addEventListener('click', () => {
   modalContainer.style.display = 'block';
 });
 
 closeModalBtn.addEventListener('click', () => {
   modalContainer.style.display = 'none';
-});
-
-document.addEventListener('click', (e) => {
-  if (e.target == modalContainer) {
-    modalContainer.style.display = 'none';
-  }
 });
 
 function displayUpdate() {
@@ -45,6 +48,7 @@ function displayUpdate() {
     const pagesData = document.createElement('td');
     const readData = document.createElement('td');
     const deleteButton = document.createElement('button');
+    const readButton = document.createElement('button');
 
     titleData.textContent = item.title;
     authorData.textContent = item.author;
@@ -53,19 +57,35 @@ function displayUpdate() {
     deleteButton.textContent = 'Delete';
     deleteButton.setAttribute('data-index', `${index}`);
     deleteButton.classList.add('deleteBook');
+    readButton.textContent = 'Read Status';
+    readButton.setAttribute('data-index', `${index}`);
+    readButton.classList.add('readButton');
 
     newRow.appendChild(titleData);
     newRow.appendChild(authorData);
     newRow.appendChild(pagesData);
     newRow.appendChild(readData);
     newRow.appendChild(deleteButton);
+    newRow.appendChild(readButton);
     table.appendChild(newRow);
     deleteButtons = document.querySelectorAll('.deleteBook');
+    readButtons = document.querySelectorAll('.readButton');
   });
 }
+
 document.addEventListener('click', (e) => {
-  if (e.target.dataset.index !== undefined) {
+  if (e.target == modalContainer) {
+    modalContainer.style.display = 'none';
+  }
+
+  if (e.target.classList.contains('deleteBook')) {
     myLibrary.splice(e.target.dataset.index, 1);
+    displayUpdate();
+  }
+
+  if (e.target.classList.contains('readButton')) {
+    let currentBook = myLibrary[e.target.dataset.index];
+    currentBook.changeRead();
     displayUpdate();
   }
 });
