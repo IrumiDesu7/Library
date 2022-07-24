@@ -20,8 +20,16 @@ function Book(title, author, pages, read) {
   };
 }
 
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+  displayBook(myLibrary);
+  localStorage.setItem('books', JSON.stringify(myLibrary));
+};
+
 function addBook(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+  // myLibrary.push(new Book(title, author, pages, read));
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
 }
 
 addBtn.addEventListener('click', () => {
@@ -58,12 +66,13 @@ function deleteBook(index) {
 function displayBook(booksArr) {
   const booksElement = booksArr.map((book, index) => {
     return `
-      <div class='card-item' onclick='deleteBook(${index})'>
+      <div class='card-item' >
         <p class='book-title'>${book.title}</p>
         <p class='book-author'>${book.author}</p>
         <p class='book-pages'>${book.pages}</p>
-        <p class='book-read'>${book.read}</p>
-        <button class='book-delete'>Delete</button>
+        <p class='book-read'>${book.read ? 'Already read' : "Haven't read"}</p>
+        <button class='book-delete' onclick='deleteBook(${index})'>Delete</button>
+        <button class='book-read' onclick='console.log(myLibrary[${index}].toggleRead())'>Toggle Read</button>
       </div>
       `;
   });
