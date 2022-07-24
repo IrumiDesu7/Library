@@ -27,9 +27,7 @@ Book.prototype.toggleRead = function () {
 };
 
 function addBook(title, author, pages, read) {
-  // myLibrary.push(new Book(title, author, pages, read));
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
+  myLibrary.push(new Book(title, author, pages, read));
 }
 
 addBtn.addEventListener('click', () => {
@@ -55,6 +53,7 @@ saveBtn.addEventListener('click', (e) => {
     : alert('Make sure you fill all the input form!');
   displayBook(myLibrary);
   localStorage.setItem('books', JSON.stringify(myLibrary));
+  bookForm.reset();
 });
 
 function deleteBook(index) {
