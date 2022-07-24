@@ -1,0 +1,20 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "Simple library project made by me</br>\r Live demo <a href=\"https://incandescent-beijinho-004cb2.netlify.app/\">here</a>",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IrumiDesu7/Library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IrumiDesu7/Library/issues"
+  },
+  "homepage": "https://github.com/IrumiDesu7/Library#readme"
+}
