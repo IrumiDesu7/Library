@@ -27,7 +27,8 @@ Book.prototype.toggleRead = function () {
 };
 
 function addBook(title, author, pages, read) {
-  myLibrary.push(new Book(title, author, pages, read));
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
 }
 
 addBtn.addEventListener('click', () => {
