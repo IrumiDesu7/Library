@@ -69,7 +69,7 @@ function displayBook(booksArr) {
       <div class='card-item' >
         <p class='book-title'>${book.title}</p>
         <p class='book-author'>${book.author}</p>
-        <p class='book-pages'>${book.pages}</p>
+        <p class='book-pages'>${book.pages} pages</p>
         <p class='book-read'>${book.read ? 'Already read' : "Haven't read"}</p>
         <button class='book-delete' onclick='deleteBook(${index})'>Delete</button>
         <button class='book-read' onclick='console.log(myLibrary[${index}].toggleRead())'>Toggle Read</button>
@@ -80,5 +80,5 @@ function displayBook(booksArr) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  displayBook(JSON.parse(localStorage.getItem('books')) || []);
+  displayBook(myLibrary);
 });
