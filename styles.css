@@ -1,68 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit&display=swap');
-
-* {
-  /* border: 1px solid blueviolet; */
-}
-
-:root {
-  --color1: #ebc2b3;
-  --color2: #d5cfc2;
-  --color3: #75868d;
-  --color4: #5a8e94;
-  --color5: #cad6d3;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  border: 1px solid rebeccapurple;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
+  font-family: sans-serif;
+  min-height: 100vh;
+}
+
+.main-title {
   margin: 0;
-  height: 100%;
-  font-family: 'Tiro Devanagari Sanskrit', serif;
-  background-color: var(--color5);
+  text-align: center;
 }
 
-.container {
+.modal-container form {
   display: flex;
+  max-width: 300px;
   flex-direction: column;
+  align-items: flex-start;
 }
-
-.addButton {
-  width: 100px;
-  height: 30px;
-  align-self: center;
-  margin-bottom: 15px;
+.book-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
-
-form {
+.card-item {
+  max-width: 300px;
+}
+.read-status {
   display: flex;
-  flex-direction: column;
-  width: 80%;
+  gap: 5px;
 }
-
-table th,
-table td {
-  width: 200px;
-  height: 20px;
-  text-align: left;
-}
-
-/* Modal Styling */
-.modalContainer {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.anotherContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 40%;
-  background-color: var(--color1);
-  margin: 10% auto;
-}
-/* End of Modal Styling */
